@@ -1,0 +1,77 @@
+.navbar {
+    background-color: #1e1e2d; /* Fondo oscuro */
+    color: #ffffff; /* Texto blanco */
+    width: 240px; /* Asegúrate de que el ancho esté consistente */
+    height: 100vh; /* Altura completa */
+    position: fixed; /* Fijo para evitar desplazamiento */
+    top: 0; /* Desde arriba */
+    left: 0; /* Desde la izquierda */
+    z-index: 1000; /* Por encima del contenido principal */
+}
+
+  
+  /* Logo */
+  .navbar-logo {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .navbar-logo .logo-app {
+    font-family: "Zoika", sans-serif;
+    color: #00aced; /* Azul */
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  
+  .navbar-logo .logo-pastoral {
+    font-family: "Bricolage Grotesque", sans-serif;
+    color: #ffffff; /* Blanco */
+    font-size: 1.5rem;
+  }
+  
+  /* Menú */
+  .navbar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  .navbar-item {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .navbar-item:hover {
+    background-color: #2b2b3d;
+  }
+  
+  .navbar-item.active {
+    background-color: #0078d7;
+    border-radius: 5px;
+  }
+  
+  /* Íconos */
+  .navbar-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 1rem;
+  }
+  
+  /* Texto del ítem */
+  .navbar-text {
+    font-size: 1rem;
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+  
+  /* Separador */
+  .navbar-divider {
+    height: 1px;
+    background-color: #383848;
+    margin: 1rem 0;
+  }
+  

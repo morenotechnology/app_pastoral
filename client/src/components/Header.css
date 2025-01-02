@@ -1,0 +1,34 @@
+.header {
+    background-color: #1f1f1f; /* Fondo negro */
+    color: #970000; /* Texto blanco */
+    display: flex; /* Activar flexbox */
+    align-items: center; /* Centrar verticalmente */
+    justify-content: flex-start; /* Alinear a la izquierda horizontalmente */
+    height: 120px; /* Altura del encabezado */
+    padding: 0 20px; /* Espaciado interno solo horizontal */
+}
+
+.header-container {
+    margin: 0;
+    padding: 0;
+}
+
+.header-title {
+    font-size: 2.5rem; /* Tamaño de texto */
+    font-weight: bold;
+    margin: 0;
+    line-height: 1; /* Reduce el espacio entre líneas */
+    display: flex;
+    flex-direction: column; /* Coloca App y Pastoral en líneas separadas */
+}
+
+.header-app {
+    font-family: "Zoika", sans-serif; /* Fuente personalizada para "App" */
+    color: #00aced; /* Azul para "App" */
+}
+
+.header-pastoral {
+    font-family: "Bricolage Grotesque", sans-serif; /* Fuente para "Pastoral" */
+    color: #ffffff; /* Blanco para "Pastoral" */
+    font-size: 1.5rem; /* Tamaño ligeramente menor */
+}
