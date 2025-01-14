@@ -1,26 +1,27 @@
-const express = require("express");
-const cors = require("cors");
-const sequelize = require("./config/database");
-const userRoutes = require("./routes/userRoutes");
-const loginRoutes = require("./routes/loginRoutes"); // Importa las rutas del login
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const pastorRoutes = require('./routes/pastorRoutes');
+const loginRoutes = require('./routes/loginRoutes'); 
+const churchRoutes = require('./routes/churchRoutes');
+const leaderRoutes = require('./routes/leaderRoutes');
 
 const app = express();
 
-// Middlewares
-app.use(cors());
-app.use(express.json());
+// Configuración de CORS
+app.use(cors({
+    origin: 'http://localhost:3001', // Puerto donde corre tu frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
 
-// Rutas
-app.use("/api", userRoutes);
-app.use("/api", loginRoutes); // Usa las rutas de login
-
-// Sincronizar base de datos
-sequelize.sync({ alter: true }).then(() => {
-    console.log("Base de datos sincronizada");
-}).catch((error) => {
-    console.error("Error al sincronizar la base de datos:", error);
-});
-
-// Puerto del servidor
+app.use(bodyParser.json());
+app.use('/api/pastors', pastorRoutes);
+app.use('/api', loginRoutes);
+app.use('/api/churches', churchRoutes);
+app.use('/api/leaders', leaderRoutes);
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Servidor ejecutándose en: http://localhost:${PORT}`));
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});

@@ -1,9 +1,9 @@
 const { Sequelize } = require("sequelize");
 
 // Crear instancia de Sequelize
-const sequelize = new Sequelize("bd_app_pastoral", "root", "Admin16.02", {
-    host: "localhost", // Cambia esto si estás usando un hosting remoto
-    dialect: "mysql",  // Usamos MySQL como base de datos
+const sequelize = new Sequelize("bd_p_app", "root", "Admin16.02", {
+    host: "localhost",
+    dialect: "mysql",
     logging: console.log,
 });
 
@@ -17,4 +17,4 @@ const sequelize = new Sequelize("bd_app_pastoral", "root", "Admin16.02", {
     }
 })();
 
-module.exports = sequelize;
+module.exports = { sequelize }; // Exportar correctamente

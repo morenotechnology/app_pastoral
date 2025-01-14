@@ -1,0 +1,84 @@
+/* Estilo general del dashboard */
+.leader-dashboard-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    background-color: #f4f6f9;
+    height: 100vh;
+}
+
+.dashboard-header {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.app-title {
+    font-size: 24px;
+}
+
+.subtitle {
+    font-size: 16px;
+}
+
+.header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.committee-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.leader-dashboard-container {
+    width: 70%;
+    margin-top: 20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.generate-link-section, .download-section, .leader-info-section {
+    margin-bottom: 20px;
+}
+
+.generate-link-button, .copy-link-button, .download-button, .view-all-button, .send-all-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.generated-link-input {
+    width: 70%;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}

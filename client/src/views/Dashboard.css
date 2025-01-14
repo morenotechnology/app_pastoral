@@ -1,9 +1,10 @@
-body {
+.dashboard-body {
     font-family: "Bricolage Grotesque", sans-serif;
     background-color: #f7f9fc;
     margin: 0;
     padding: 0;
 }
+
 /* Header dentro del contenido */
 .dashboard-header {
     position: relative;
@@ -17,7 +18,6 @@ body {
     align-items: center;
     justify-content: space-between;
     margin-left: 250px; /* Ajustar el margen izquierdo */
-    
 }
 
 /* Estilo del texto del header */

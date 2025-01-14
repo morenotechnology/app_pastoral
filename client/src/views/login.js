@@ -1,74 +1,89 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Header from "../components/Header"; // Importa el Header desde components
-import "./login.css"; // Archivo CSS encapsulado para Login
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Header from "../components/Header"; // Importar el Header
+import './login.css'; // Importar el CSS
 
-const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [message, setMessage] = useState(""); // Mensaje de error
+function Login() {
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        document.body.classList.add('login-body');
+        return () => {
+            document.body.classList.remove('login-body');
+        };
+    }, []);
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:3000/api/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ correo: email, contraseña: password }),
+            const response = await fetch('http://localhost:3000/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
-                setMessage(errorData.message || "Credenciales incorrectas.");
-                return;
+                throw new Error('Error al iniciar sesión');
             }
 
             const data = await response.json();
 
-            // Verifica si `data.user` existe
-            if (data.user) {
-                localStorage.setItem("user", JSON.stringify(data.user)); // Guarda el usuario en localStorage
-                navigate("/dashboard"); // Redirige al Dashboard
-            } else {
-                setMessage("Error: La respuesta del servidor no contiene datos del usuario.");
+            if (data.role === 'pastor') {
+                navigate('/pastorDashboard');
+            } else if (data.role === 'leader') {
+                navigate('/leaderDashboard');
             }
         } catch (error) {
-            console.error("Error al iniciar sesión:", error);
-            setMessage("Ocurrió un error al iniciar sesión. Intenta nuevamente.");
+            console.error('Error durante el inicio de sesión:', error);
+            setErrorMessage('Correo o contraseña incorrectos');
         }
     };
 
     return (
-        <div className="login-page">
-            {/* Header General */}
+        <div>
             <Header />
-            <div className="login-wrapper">
-                <div className="login-container">
-                    <h1 className="login-title">Iniciar Sesión</h1>
+            <div className="login-container">
+                <h2 className="login-title">Iniciar Sesión</h2>
+                <div className="login-box">
                     <form className="login-form" onSubmit={handleSubmit}>
                         <input
                             type="email"
+                            name="email"
                             placeholder="Usuario o correo"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
                         />
                         <input
                             type="password"
+                            name="password"
                             placeholder="Contraseña"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
                         />
-                        <button type="submit" className="login-button">
-                            Iniciar sesión
-                        </button>
+                        {errorMessage && <p className="error-message">{errorMessage}</p>}
+                        <button type="submit" className="login-button">Iniciar sesión</button>
                     </form>
-                    {message && <p className="login-message">{message}</p>}
-                    <a href="#" className="login-link">Registrarse</a>
+                    <button
+                        className="register-link"
+                        onClick={() => navigate('/register')}
+                    >
+                        Registrarse
+                    </button>
                 </div>
             </div>
         </div>
     );
-};
+}
 
 export default Login;

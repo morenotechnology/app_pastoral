@@ -6,17 +6,12 @@ const MainHeader = ({ user }) => {
     return (
         <header className="MainHeader">
             <div className="welcome-message">
-                <h1>Bienvenido, {user?.nombre_completo || "Invitado"}</h1>
-
-                <p>Herramienta de administración ministerial</p>
-            </div>
-            <div className="search-bar">
-                <input type="text" placeholder="Buscar líder" />
-                <img src={searchIcon} alt="Search Icon" className="search-icon" />
+                <h1>Bienvenido, {user?.pastorName || "Invitado"}</h1>
+                <p>{user?.churchName || "Sin iglesia asignada"}</p>
             </div>
             <div className="profile-info">
-                <span>{user.nombre_completo}</span>
-                <span className="role">{user.role || "Usuario"}</span>
+                <span>{user.pastorName}</span>
+                <span className="role">Pastor</span>
                 <img
                     className="avatar"
                     src="https://via.placeholder.com/40"

@@ -4,6 +4,10 @@ import Register from "./views/Register";
 import Login from "./views/login";
 import Dashboard from "./views/Dashboard"; // Importa el Dashboard
 import Encuesta  from "./views/Encuesta";   
+import RegisterPastor from "./views/RegisterPastor";
+import RegisterLeader from "./views/RegisterLeader";
+import LeaderDashboard from "./views/LeaderDashboard";
+
 
 
 const App = () => {
@@ -20,6 +24,10 @@ const App = () => {
                 {/* Ruta para el Dashboard */}
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/encuesta" element={<Encuesta />} />
+                <Route path="/registerPastor" element={<RegisterPastor />} />
+                <Route path="/registerLeader" element={<RegisterLeader />} />
+                <Route path="/leaderDashboard" element={<LeaderDashboard />} />
+
             </Routes>
         </Router>
     );

@@ -11,6 +11,13 @@ const Dashboard = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    document.body.classList.add("dashboard-body"); // Agregar clase específica al body
+    return () => {
+      document.body.classList.remove("dashboard-body"); // Eliminar la clase al desmontar
+    };
+  }, []);
+
+  useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));

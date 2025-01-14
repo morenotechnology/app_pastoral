@@ -1,9 +1,8 @@
-const express = require("express");
-const { loginUser } = require("../controllers/loginController"); // Importa el controlador del login
-
+const express = require('express');
 const router = express.Router();
+const loginController = require('../controllers/loginController');
 
-// Ruta para iniciar sesión
-router.post("/login", loginUser);
+// Ruta para manejar el inicio de sesión
+router.post('/login', loginController.login);
 
 module.exports = router;

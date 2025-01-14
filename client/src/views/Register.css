@@ -1,67 +1,93 @@
+/* Estilos generales */
+body {
+    font-family: "Bricolage Grotesque", sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f7fc;
+}
+
+/* Header fijo */
+header {
+    width: 100%;
+    background-color: #1d3557;
+    padding: 15px 20px;
+    color: white;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Contenedor principal */
 .register-container {
+    width: 100%;
     max-width: 500px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 50px 40px;
+    margin-top: 100px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
     text-align: center;
 }
 
+/* Título */
 .register-title {
-    font-size: 24px;
-    color: #007bff;
-    margin-bottom: 20px;
+    font-size: 28px;
+    color: #1d3557;
+    margin-bottom: 30px;
+    font-weight: bold;
 }
 
-.role-selection {
+/* Contenedor de botones */
+.button-container {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-.role-button {
-    padding: 10px 20px;
-    font-size: 18px;
-    border: none;
-    border-radius: 8px;
-    background: linear-gradient(to right, #007bff, #00aced);
-    color: white;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-}
-
-.role-button:hover {
-    transform: scale(1.05);
-}
-
-.register-form input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-}
-
+/* Botones */
 .register-button {
     width: 100%;
-    padding: 12px;
+    padding: 15px 20px;
     font-size: 16px;
-    color: white;
-    background: linear-gradient(to right, #007bff, #00aced);
+    color: #ffffff;
     border: none;
-    border-radius: 8px;
+    border-radius: 20px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .register-button:hover {
-    background: linear-gradient(to right, #0056b3, #007bb5);
+    transform: scale(1.05);
 }
 
-.error-message {
-    color: red;
-    font-size: 12px;
-    text-align: left;
-    margin-bottom: 10px;
+/* Botón de pastor */
+.pastor-button {
+    background: linear-gradient(90deg, #0096ff, #00d4ff);
+}
+
+/* Botón de líder */
+.leader-button {
+    background: linear-gradient(90deg, #ff7a18, #ffb347);
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .register-container {
+        max-width: 600px;
+    }
+
+    .register-title {
+        font-size: 32px;
+    }
+
+    .register-button {
+        font-size: 18px;
+    }
 }
