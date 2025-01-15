@@ -30,13 +30,16 @@ function Login() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             });
-
+    
             if (!response.ok) {
                 throw new Error('Error al iniciar sesión');
             }
-
+    
             const data = await response.json();
-
+    
+            // Guardar el token en el localStorage
+            localStorage.setItem('token', data.token);
+    
             if (data.role === 'pastor') {
                 navigate('/pastorDashboard');
             } else if (data.role === 'leader') {
@@ -47,6 +50,7 @@ function Login() {
             setErrorMessage('Correo o contraseña incorrectos');
         }
     };
+    
 
     return (
         <div>

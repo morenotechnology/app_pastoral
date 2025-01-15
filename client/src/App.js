@@ -8,6 +8,7 @@ import RegisterPastor from "./views/RegisterPastor";
 import RegisterLeader from "./views/RegisterLeader";
 import LeaderDashboard from "./views/LeaderDashboard";
 
+import Survey from "./views/survey";
 
 
 const App = () => {
@@ -27,6 +28,9 @@ const App = () => {
                 <Route path="/registerPastor" element={<RegisterPastor />} />
                 <Route path="/registerLeader" element={<RegisterLeader />} />
                 <Route path="/leaderDashboard" element={<LeaderDashboard />} />
+                <Route path="/survey/:id" element={<Survey />} />
+
+
 
             </Routes>
         </Router>

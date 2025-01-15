@@ -1,84 +1,113 @@
-/* Estilo general del dashboard */
-.leader-dashboard-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    font-family: 'Bricolage Grotesque', sans-serif;
-    background-color: #f4f6f9;
-    height: 100vh;
-}
-
-.dashboard-header {
-    width: 100%;
-    background-color: #007bff;
-    color: white;
-    padding: 15px 20px;
+.leader-dashboard-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 8px;
+    background: linear-gradient(90deg, #007bff, #00c6ff);
+    color: white;
+    padding: 15px 30px; /* Reduce el padding del header */
+    border-radius: 0px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ocupa todo el ancho de la pantalla */
+    margin: 0;
 }
 
-.app-title {
+
+.header-left h1 {
+    margin: 0;
     font-size: 24px;
+    font-weight: bold;
+    color: #f4f7fb; /* Cambia el color del texto para que sea visible */
 }
 
-.subtitle {
-    font-size: 16px;
+.header-left p {
+    
+    font-size: 14px;
+    color: #e3eaf5; /* Ajuste de color para el subtítulo */
 }
 
 .header-right {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 25px;
+}
+
+
+.dashboard-content {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
+    margin-top: 30px;
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.committee-name {
-    font-size: 16px;
-    font-weight: bold;
+.generate-link-section,
+.download-section {
+    margin-bottom: 30px;
+    width: 100%;
+    text-align: center;
 }
 
-.leader-dashboard-container {
-    width: 70%;
-    margin-top: 20px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
-
-.section-title {
-    font-size: 22px;
-    margin-bottom: 15px;
-    color: #333;
-}
-
-.generate-link-section, .download-section, .leader-info-section {
-    margin-bottom: 20px;
-}
-
-.generate-link-button, .copy-link-button, .download-button, .view-all-button, .send-all-button {
-    padding: 10px 20px;
+.generate-link-section button,
+.download-section button {
+    padding: 12px 25px;
     border: none;
-    border-radius: 5px;
-    background-color: #007bff;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #007bff, #00c6ff);
     color: white;
+    font-weight: bold;
+    font-size: 14px;
     cursor: pointer;
-    font-size: 16px;
+    transition: background 0.3s ease;
 }
 
-.generated-link-input {
-    width: 70%;
-    padding: 10px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+.generate-link-section button:hover,
+.download-section button:hover {
+    background: linear-gradient(90deg, #0056b3, #0096c7);
 }
 
-.action-buttons {
+.link-display {
+    margin-top: 20px;
     display: flex;
+    align-items: center;
     justify-content: center;
     gap: 10px;
+}
+
+.link-display input {
+    flex: 1;
+    max-width: 500px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .dashboard-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .generate-link-section button,
+    .download-section button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .link-display {
+        flex-direction: column;
+    }
+
+    .link-display input {
+        margin-bottom: 10px;
+        width: 100%;
+    }
 }
