@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import * as XLSX from 'xlsx';
 import './LeaderDashboard.css';
 
 function LeaderDashboard() {
-    const [leaderName, setLeaderName] = useState(''); // Inicializado vacío
-    const [committeeName, setCommitteeName] = useState(''); // Inicializado vacío
-    const [leaderId, setLeaderId] = useState(null); // Guardar el ID del líder
+    const [leaderName, setLeaderName] = useState('');
+    const [committeeName, setCommitteeName] = useState('');
+    const [leaderId, setLeaderId] = useState(null);
     const [linkGenerated, setLinkGenerated] = useState(false);
     const [generatedLink, setGeneratedLink] = useState('');
-    const [errorMessage, setErrorMessage] = useState(''); // Para mostrar mensajes de error
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         const fetchLeaderData = async () => {
             try {
-                const token = localStorage.getItem('token'); // Obtener el token del localStorage
+                const token = localStorage.getItem('token');
                 const response = await fetch('http://localhost:3000/api/leaders/me', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
+                        'Authorization': `Bearer ${token}`,
+                    },
                 });
 
                 if (!response.ok) {
@@ -44,14 +45,14 @@ function LeaderDashboard() {
             const response = await fetch('http://localhost:3000/api/leaders/generate-link', {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+                    'Authorization': `Bearer ${token}`,
+                },
             });
-    
+
             if (!response.ok) {
                 throw new Error('Error al generar el enlace');
             }
-    
+
             const data = await response.json();
             setGeneratedLink(data.link);
             setLinkGenerated(true);
@@ -60,12 +61,36 @@ function LeaderDashboard() {
             alert('No se pudo generar el enlace');
         }
     };
-    
+
     const handleCopyLink = () => {
         navigator.clipboard.writeText(generatedLink);
         alert('¡Enlace copiado al portapapeles!');
     };
 
+    const handleDownloadResults = async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/api/surveys/export/${leaderId}`, {
+                method: 'GET',
+            });
+    
+            if (!response.ok) {
+                throw new Error('Error al descargar los resultados.');
+            }
+    
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `resultados_leader_${leaderId}.xlsx`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        } catch (error) {
+            console.error('Error al descargar los resultados:', error);
+            alert('No se pudieron descargar los resultados.');
+        }
+    };
+    
     return (
         <div className="leader-dashboard">
             <header className="leader-dashboard-header">
@@ -95,7 +120,7 @@ function LeaderDashboard() {
                 <div className="download-section">
                     <h3>Descargar resultados</h3>
                     <p>Formato: .xls</p>
-                    <button>Descargar</button>
+                    <button onClick={handleDownloadResults}>Descargar</button>
                 </div>
             </div>
         </div>

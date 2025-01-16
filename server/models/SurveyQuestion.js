@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database'); // Importa la configuración de Sequelize
+const SurveyOption = require('./SurveyOption'); // Importar el modelo de opciones si es necesario
 
 const SurveyQuestion = sequelize.define('SurveyQuestion', {
     id: {
@@ -17,7 +18,9 @@ const SurveyQuestion = sequelize.define('SurveyQuestion', {
     }
 }, {
     tableName: 'survey_questions', // Nombre de la tabla en la base de datos
-    timestamps: false // No queremos que Sequelize agregue createdAt y updatedAt automáticamente
+    timestamps: false // Desactiva createdAt y updatedAt automáticos
 });
+
+
 
 module.exports = SurveyQuestion;

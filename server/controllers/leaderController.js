@@ -1,4 +1,3 @@
-// controllers/leaderController.js
 const Leader = require('../models/leader');
 
 exports.registerLeader = async (req, res) => {
