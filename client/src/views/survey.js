@@ -16,7 +16,8 @@ function Survey() {
         const fetchSurveyData = async () => {
             try {
                 // Fetch survey questions
-                const questionsResponse = await fetch(`http://localhost:3000/api/surveys/${surveyId}/questions`);
+                const questionsResponse = await fetch(`${process.env.REACT_APP_API_URL}/surveys/${surveyId}/questions`);
+
                 if (!questionsResponse.ok) {
                     throw new Error('Error al cargar las preguntas de la encuesta');
                 }
@@ -24,7 +25,8 @@ function Survey() {
                 setQuestions(questionsData.questions);
 
                 // Fetch leader data
-                const leaderResponse = await fetch(`http://localhost:3000/api/surveys/${surveyId}/leader`);
+                const leaderResponse = await fetch(`${process.env.REACT_APP_API_URL}/surveys/${surveyId}/leader`);
+
                 if (!leaderResponse.ok) {
                     throw new Error('Error al cargar los datos del líder');
                 }

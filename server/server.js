@@ -1,3 +1,6 @@
+// Cargar las variables de entorno desde el archivo .env
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -10,7 +13,7 @@ const app = express();
 
 // Configuración de CORS
 app.use(cors({
-    origin: 'http://localhost:3001', // Puerto donde corre tu frontend
+    origin: process.env.FRONTEND_URL || 'http://localhost:3001', // Usa la URL del frontend desde .env
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
@@ -25,7 +28,7 @@ app.use('/api/churches', churchRoutes);
 app.use('/api/leaders', leaderRoutes);
 app.use('/api/surveys', surveyRoutes); // Registrar surveyRoutes correctamente
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // Usa el puerto desde .env, o 3000 si no está definido
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

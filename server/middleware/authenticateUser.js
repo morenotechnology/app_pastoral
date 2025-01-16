@@ -8,7 +8,7 @@ const authenticateUser = (req, res, next) => {
     }
 
     try {
-        const decoded = jwt.verify(token, 'tu_clave_secreta');
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);  // Usa la variable de entorno
         req.user = decoded; // Guarda el ID y rol del usuario en req.user
         next();
     } catch (error) {
