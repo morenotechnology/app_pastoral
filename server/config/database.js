@@ -1,17 +1,14 @@
-require('dotenv').config();
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD, {
-        host: process.env.DB_HOST,
-        dialect: "mysql",
-        port: process.env.DB_PORT,
-        logging: console.log,
-    }
-);
+// Crear instancia de Sequelize
+const sequelize = new Sequelize("bd_p_app", "admin", "Admin16.02", {
+    host: "145.223.92.106",
+    dialect: "mysql",
+    port: 3306,
+    logging: console.log,
+});
 
+// Probar conexión
 (async () => {
     try {
         await sequelize.authenticate();
@@ -21,4 +18,4 @@ const sequelize = new Sequelize(
     }
 })();
 
-module.exports = { sequelize };
+module.exports = { sequelize }; // Exportar correctamente

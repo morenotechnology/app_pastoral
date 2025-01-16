@@ -47,7 +47,7 @@ router.get('/generate-link', auth, async (req, res) => {
         }
 
         // Generar el enlace con el survey_id de la encuesta
-        const uniqueLink = `http://localhost:3001/survey/${survey.id}`;
+        const uniqueLink = `http://145.223.92.106:3001/survey/${survey.id}`;
 
         res.status(200).json({
             message: 'Enlace generado exitosamente',

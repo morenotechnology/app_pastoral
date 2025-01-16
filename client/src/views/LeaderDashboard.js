@@ -14,7 +14,7 @@ function LeaderDashboard() {
         const fetchLeaderData = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await fetch('http://localhost:3000/api/leaders/me', {
+                const response = await fetch('http://145.223.92.106:3000/api/leaders/me', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ function LeaderDashboard() {
     const handleGenerateLink = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:3000/api/leaders/generate-link', {
+            const response = await fetch('http://145.223.92.106:3000/api/leaders/generate-link', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -69,14 +69,10 @@ function LeaderDashboard() {
 
     const handleDownloadResults = async () => {
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/leaders/me`, {
+            const response = await fetch(`http://145.223.92.106:3000/api/surveys/export/${leaderId}`, {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
             });
-            
+    
             if (!response.ok) {
                 throw new Error('Error al descargar los resultados.');
             }

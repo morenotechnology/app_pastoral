@@ -16,17 +16,24 @@ function Survey() {
         const fetchSurveyData = async () => {
             try {
                 // Fetch survey questions
-                const questionsResponse = await fetch(`${process.env.REACT_APP_API_URL}/surveys/${surveyId}/questions`);
-
+                const questionsResponse = await fetch(`http://145.223.92.106:3000/api/surveys/${surveyId}/questions`);
                 if (!questionsResponse.ok) {
                     throw new Error('Error al cargar las preguntas de la encuesta');
                 }
                 const questionsData = await questionsResponse.json();
-                setQuestions(questionsData.questions);
+
+                // Modificar las preguntas 31 a 35
+                const modifiedQuestions = questionsData.questions.map((question) => {
+                    if (question.id >= 31 && question.id <= 35) {
+                        question.question = `Pensando en la administración del tiempo como un recurso valioso ¿Qué tanto tiempo dedica a… ${question.question}`;
+                    }
+                    return question;
+                });
+
+                setQuestions(modifiedQuestions);
 
                 // Fetch leader data
-                const leaderResponse = await fetch(`${process.env.REACT_APP_API_URL}/surveys/${surveyId}/leader`);
-
+                const leaderResponse = await fetch(`http://145.223.92.106:3000/api/surveys/${surveyId}/leader`);
                 if (!leaderResponse.ok) {
                     throw new Error('Error al cargar los datos del líder');
                 }
@@ -85,7 +92,7 @@ function Survey() {
         });
 
         try {
-            const response = await fetch(`http://localhost:3000/api/surveys/${surveyId}/submit`, {
+            const response = await fetch(`http://145.223.92.106:3000/api/surveys/${surveyId}/submit`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ responses: responsesArray }),
@@ -116,26 +123,32 @@ function Survey() {
     const isLastArea = currentAreaIndex === areaKeys.length - 1;
 
     const handleNextArea = () => {
-        // Verifica si todas las preguntas del área actual tienen respuestas
         const currentAreaQuestions = groupedQuestions[currentArea];
-        const allAnswered = currentAreaQuestions.every((question) => {
-            const response = responses[question.id];
-            if (Array.isArray(response)) {
-                return response.length > 0;
+
+        // Verifica si el área actual es opcional
+        const isOptionalArea = currentArea === 'Área de Doctrinas Fundamentales';
+
+        // Si no es opcional, verificar que todas las preguntas estén respondidas
+        if (!isOptionalArea) {
+            const allAnswered = currentAreaQuestions.every((question) => {
+                const response = responses[question.id];
+                if (Array.isArray(response)) {
+                    return response.length > 0;
+                }
+                return response !== undefined && response !== null;
+            });
+
+            if (!allAnswered) {
+                alert('Por favor, responde todas las preguntas antes de continuar.');
+                return;
             }
-            return response !== undefined && response !== null;
-        });
-    
-        if (!allAnswered) {
-            alert('Por favor, responda todas las preguntas antes de continuar.');
-            return;
         }
-    
+
+        // Avanzar al siguiente área si está disponible
         if (currentAreaIndex < areaKeys.length - 1) {
             setCurrentAreaIndex((prevIndex) => prevIndex + 1);
         }
     };
-    
 
     const handlePrevArea = () => {
         if (currentAreaIndex > 0) {
@@ -170,7 +183,6 @@ function Survey() {
 
         return (
             <div>
-                <h2>Área de Doctrinas Fundamentales</h2>
                 <table className="doctrina-table">
                     <thead>
                         <tr>
@@ -224,10 +236,20 @@ function Survey() {
                                     <label>
                                         <input
                                             type={question.id === 8 || question.id === 9 || question.id === 19 || question.id === 30 || question.id === 36 || question.id === 38 ? 'checkbox' : 'radio'}
-                                            name={`question-${question.id}${question.id === 8 || question.id === 9 || question.id === 19 || question.id === 30 || question.id === 36 || question.id === 38 ? `-${option.id}` : ''}`}
+                                            name={`question-${question.id}`}
                                             value={option.id}
-                                            onChange={() => handleOptionChange(question.id, option.id, question.id === 8 || question.id === 9 || question.id === 19 || question.id === 30 || question.id === 36 || question.id === 38)}
-                                            required={!(question.id === 8 || question.id === 9 || question.id === 19 || question.id === 30 || question.id === 36 || question.id === 38)}
+                                            checked={
+                                                Array.isArray(responses[question.id])
+                                                    ? responses[question.id].includes(option.id)
+                                                    : responses[question.id] === option.id
+                                            }
+                                            onChange={() =>
+                                                handleOptionChange(
+                                                    question.id,
+                                                    option.id,
+                                                    question.id === 8 || question.id === 9 || question.id === 19 || question.id === 30 || question.id === 36 || question.id === 38
+                                                )
+                                            }
                                         />
                                         {option.option_text}
                                     </label>

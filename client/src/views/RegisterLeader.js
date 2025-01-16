@@ -19,7 +19,7 @@ function RegisterLeader() {
     useEffect(() => {
         const fetchChurches = async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/churches');
+                const response = await fetch('http://145.223.92.106:3000/api/churches');
                 if (!response.ok) throw new Error('Error al cargar las iglesias');
                 const data = await response.json();
                 console.log('Iglesias recibidas:', data); // Verificar que llegan los datos
@@ -41,7 +41,7 @@ function RegisterLeader() {
         console.log('Datos a enviar:', formData); // Verificar el contenido de formData
     
         try {
-            const response = await fetch('http://localhost:3000/api/leaders/register', {
+            const response = await fetch('http://145.223.92.106:3000/api/leaders/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
